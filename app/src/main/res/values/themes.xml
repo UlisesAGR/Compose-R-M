@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <style name="Theme.Compose" parent="android:Theme.Material.Light.NoActionBar" />
+
+    <style name="App.Starting.Theme" parent="Theme.SplashScreen">
+        <item name="windowSplashScreenBackground">#FFF9FAEF</item>
+        <item name="windowSplashScreenAnimatedIcon">@drawable/il_logo</item>
+        <item name="postSplashScreenTheme">@style/Theme.Compose</item>
+    </style>
+
+</resources>

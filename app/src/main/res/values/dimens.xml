@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <!--Padding-->
+    <dimen name="padding.small">8dp</dimen>
+    <dimen name="padding">16dp</dimen>
+    <dimen name="padding.big">24dp</dimen>
+    <dimen name="padding.extra">32dp</dimen>
+    <dimen name="padding.splash">191dp</dimen>
+
+    <!--Margin-->
+    <dimen name="margin.small">8dp</dimen>
+    <dimen name="margin">16dp</dimen>
+    <dimen name="margin.big">24dp</dimen>
+    <dimen name="margin.extra">32dp</dimen>
+
+    <!--Size-->
+    <dimen name="icon.small">12dp</dimen>
+    <dimen name="image.small">125dp</dimen>
+    <dimen name="image.medium">175dp</dimen>
+    <dimen name="image.big">225dp</dimen>
+    <dimen name="icons">24dp</dimen>
+
+</resources>
