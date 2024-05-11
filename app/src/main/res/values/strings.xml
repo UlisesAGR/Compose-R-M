@@ -10,6 +10,15 @@
     <string name="home">Home</string>
     <string name="animated_color">animated Color</string>
     <string name="logo_words">Logo words</string>
-    <string name="app_error_getting_character">Error getting character</string>
     <string name="infinite_transition">infinite transition</string>
+    <string name="error_getting_character">Error getting character</string>
+    <string name="error_red">Check your internet connection</string>
+    <string name="error_timeout">Timed out</string>
+    <string name="error_http">There are problems with the servidor, try again later</string>
+    <string name="error_generic">At the moment we are unable to perform this action, I will try later</string>
+    <string name="error_open_web">Couldnt open browser</string>
+    <string name="open_documentation_api">Open documentation api rick y morty</string>
+    <string name="confirm">Confirm</string>
+    <string name="dismiss">Dismiss</string>
+    <string name="message">Message</string>
 </resources>

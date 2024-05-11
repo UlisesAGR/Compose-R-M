@@ -5,6 +5,13 @@
  */
 package com.compose.domain.provider
 
+import com.compose.data.network.utils.DataError
+
 interface ResourceProvider {
-    fun getErrorGettingCharacterLabel(): String
+    fun errorGetCharacterLabel(): String
+    fun errorRedLabel(): String
+    fun errorTimeoutLabel(): String
+    fun errorHttpLabel(): String
+    fun errorGenericLabel(): String
+    fun parseError(network: DataError.Network): String
 }

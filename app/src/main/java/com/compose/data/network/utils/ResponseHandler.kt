@@ -75,7 +75,7 @@ internal fun parseFailureResponse(
     return FailureData(stringCode, type, detail, moreInfo)
 }
 
-fun Throwable.parseError(): DataException.GenericException =
+fun Throwable.parseException(): DataException.GenericException =
     when (this) {
         is UnknownHostException, is ConnectException, is SocketException ->
             DataException.GenericException(this.cause.hashCode(), DataError.Network.RED_ERROR)

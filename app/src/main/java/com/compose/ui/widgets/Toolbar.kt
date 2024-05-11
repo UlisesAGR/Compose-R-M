@@ -15,6 +15,7 @@ import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.platform.LocalContext
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -60,6 +61,8 @@ fun DetailsTopBar(
     onFavorite: () -> Unit,
     onShare: () -> Unit,
 ) {
+    val context = LocalContext.current
+
     TopAppBar(
         modifier = Modifier.fillMaxWidth(),
         colors = TopAppBarDefaults.mediumTopAppBarColors(

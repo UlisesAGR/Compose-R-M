@@ -3,6 +3,7 @@ package com.compose.ui.utils
 import android.content.Context
 import android.content.Intent
 import android.net.Uri
+import android.widget.Toast
 import androidx.activity.ComponentActivity
 import androidx.compose.ui.graphics.Color
 import coil.annotation.ExperimentalCoilApi
@@ -10,6 +11,11 @@ import coil.imageLoader
 import com.compose.data.network.utils.DataError.Launch
 import com.compose.data.network.utils.Result
 import com.compose.domain.model.Character.Status
+
+fun Context.showToast(text: String) {
+    Toast.makeText(this, text, Toast.LENGTH_SHORT).show()
+}
+
 
 fun String?.setValue(): String = this ?: "N/A"
 

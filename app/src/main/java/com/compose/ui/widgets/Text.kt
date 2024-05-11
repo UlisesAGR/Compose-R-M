@@ -1,7 +1,5 @@
 package com.compose.ui.widgets
 
-import android.content.Context
-import android.widget.Toast
 import androidx.compose.animation.animateColor
 import androidx.compose.animation.core.RepeatMode
 import androidx.compose.animation.core.infiniteRepeatable
@@ -14,11 +12,6 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.stringResource
 import com.compose.R
 import com.compose.domain.model.Character
-
-@Composable
-fun Context.ShowToast(text: String) {
-    Toast.makeText(this, text, Toast.LENGTH_SHORT).show()
-}
 
 @Composable
 fun animatedColorText(status: Character.Status): Color {

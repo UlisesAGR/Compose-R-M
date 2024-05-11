@@ -5,6 +5,7 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.compose.data.network.utils.parseException
 import com.compose.domain.provider.ResourceProvider
 import com.compose.domain.usecase.GetCharacterUseCase
 import com.compose.presentation.main.navigation.NavArg
@@ -32,10 +33,10 @@ class ContainerViewModel @Inject constructor(
         savedStateHandle.findArg<Int>(NavArg.CharacterId).let { characterId ->
             getCharacterUseCase.invoke(characterId)
                 .catch { exception ->
-                    _state.value.apply {
-                        ContainerState.Loading(isLoading = false)
-                        ContainerState.Error(message = "")
-                    }
+                    _state.value = ContainerState.Loading(isLoading = false)
+                    _state.value = ContainerState.Error(
+                        message = resourceProvider.parseError(exception.parseException().error)
+                    )
                 }
                 .collect { response ->
                     if (response.isSuccessful()) {
@@ -46,8 +47,7 @@ class ContainerViewModel @Inject constructor(
                     } else {
                         _state.value = ContainerState.Loading(isLoading = false)
                         _state.value = ContainerState.Error(
-                            message = response.details
-                                ?: resourceProvider.getErrorGettingCharacterLabel()
+                            message = response.details ?: resourceProvider.errorGetCharacterLabel()
                         )
                     }
                 }
