@@ -20,6 +20,10 @@ android {
         vectorDrawables {
             useSupportLibrary = true
         }
+
+        buildConfigField("String", "DATABASE_NAME", "\"database\"")
+        buildConfigField("String", "BASE_URL", "\"https://rickandmortyapi.com/api/\"")
+        buildConfigField("String", "CHARACTER", "\"character\"")
     }
 
     buildTypes {
@@ -66,7 +70,9 @@ android {
 dependencies {
     //core
     implementation(libs.androidx.core.ktx)
-    implementation(libs.androidx.lifecycle.runtime.ktx)
+    implementation(libs.org.coroutines)
+    implementation("androidx.lifecycle:lifecycle-runtime-compose:2.6.2")
+    implementation("androidx.compose.runtime:runtime-livedata:1.6.7")
     //ui
     implementation(libs.androidx.activity.compose)
     implementation(platform(libs.androidx.compose.bom))
@@ -77,15 +83,20 @@ dependencies {
     implementation("androidx.compose.ui:ui-text-google-fonts:1.6.7")
     //library
     implementation(libs.bundles.androidx.material.desing)
-    implementation("androidx.core:core-splashscreen:1.0.1")
-    implementation( "androidx.navigation:navigation-compose:2.7.7")
-    implementation("io.coil-kt:coil-compose:2.6.0")
     implementation(libs.hilt)
     ksp(libs.hilt.compiler)
+    implementation(libs.bundles.com.retrofit)
+    implementation(libs.okhttp.logging.interceptor)
+    implementation(libs.bundles.androidx.room)
+    ksp(libs.room.compiler)
+    implementation("androidx.core:core-splashscreen:1.0.1")
+    implementation("androidx.navigation:navigation-compose:2.7.7")
     implementation("androidx.hilt:hilt-navigation-compose:1.2.0")
+    implementation("io.coil-kt:coil-compose:2.6.0")
     implementation("nl.dionsegijn:konfetti-compose:2.0.4")
     //test
     testImplementation(libs.junit)
+    testImplementation(libs.org.coroutines.test)
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)
     androidTestImplementation(platform(libs.androidx.compose.bom))

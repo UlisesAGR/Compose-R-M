@@ -11,6 +11,7 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import coil.compose.AsyncImage
 import coil.request.ImageRequest
+import coil.transform.CircleCropTransformation
 import com.compose.R
 
 @Composable
@@ -25,9 +26,31 @@ fun LoadImage(
         modifier = modifier,
         model = ImageRequest.Builder(context)
             .data(data)
+            .crossfade(true)
             .placeholder(placeholder)
             .error(error)
-            //.crossfade(true)
+            .build(),
+        contentScale = ContentScale.Crop,
+        contentDescription = stringResource(R.string.load_image),
+    )
+}
+
+@Composable
+fun LoadCircularImage(
+    modifier: Modifier = Modifier,
+    data: String?,
+    placeholder: Int,
+    error: Int,
+) {
+    val context = LocalContext.current
+    AsyncImage(
+        modifier = modifier,
+        model = ImageRequest.Builder(context)
+            .data(data)
+            .crossfade(true)
+            .placeholder(placeholder)
+            .error(error)
+            .transformations(CircleCropTransformation())
             .build(),
         contentScale = ContentScale.Crop,
         contentDescription = stringResource(R.string.load_image),

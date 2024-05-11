@@ -6,9 +6,10 @@
     <string name="load_image">Load image</string>
     <string name="illustration_logo">Illustration logo</string>
     <string name="here_you_can_see_content_about_rick_y_morty">Here you can see content about Rick y Morty</string>
-    <string name="arrow_back">Arrow back</string>
     <string name="back">Back</string>
     <string name="home">Home</string>
     <string name="animated_color">animated Color</string>
     <string name="logo_words">Logo words</string>
+    <string name="app_error_getting_character">Error getting character</string>
+    <string name="infinite_transition">infinite transition</string>
 </resources>

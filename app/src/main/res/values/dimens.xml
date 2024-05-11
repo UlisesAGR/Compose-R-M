@@ -16,6 +16,7 @@
 
     <!--Size-->
     <dimen name="icon.small">12dp</dimen>
+    <dimen name="icon">18dp</dimen>
     <dimen name="image.small">125dp</dimen>
     <dimen name="image.medium">175dp</dimen>
     <dimen name="image.big">225dp</dimen>

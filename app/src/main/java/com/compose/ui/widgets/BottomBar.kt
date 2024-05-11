@@ -24,8 +24,8 @@ import androidx.compose.ui.res.dimensionResource
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavHostController
 import com.compose.R
-import com.compose.model.BottomNavigationItem
-import com.compose.presentation.container.navigation.NavItem
+import com.compose.domain.model.BottomNavigationItem
+import com.compose.presentation.main.navigation.NavItem
 
 @Composable
 fun BottomBar(navController: NavHostController) {
