@@ -6,13 +6,15 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
+import androidx.navigation.NavHostController
 import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
 import com.compose.ui.widgets.BottomBar
 
 @Composable
-fun AppNavigation() {
-    val navController = rememberNavController()
+fun AppNavigation(
+    navController: NavHostController = rememberNavController(),
+) {
     val backStackState = navController.currentBackStackEntryAsState().value
     val isBottomBarVisible = remember(key1 = backStackState) {
         backStackState?.destination?.route == NavItem.Home.route
@@ -32,5 +34,5 @@ fun AppNavigation() {
 @Preview(showBackground = true)
 @Composable
 private fun PreviewNavigation() {
-    AppNavigation()
+    //AppNavigation(navController, viewModel)
 }

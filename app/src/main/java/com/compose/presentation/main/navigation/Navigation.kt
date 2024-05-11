@@ -26,7 +26,9 @@ fun Navigation(
         }
         composable(NavItem.Detail) {
             DetailScreen(
-                onBack = { navController.navigateUp() },
+                onBack = {
+                    navController.navigateUp()
+                },
             )
         }
     }

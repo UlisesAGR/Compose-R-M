@@ -47,11 +47,13 @@ fun ListScreen(
             ),
             verticalArrangement = Arrangement.spacedBy(dimensionResource(id = R.dimen.padding)),
         ) {
-            items(items = getCharacters()) { character ->
+            items(
+                items = getCharacters(),
+                key = { it.id },
+            ) { character ->
                 ItemCharacter(
                     character,
                     onClick = {
-                        println("click")
                         characterSelected(character)
                     },
                 )

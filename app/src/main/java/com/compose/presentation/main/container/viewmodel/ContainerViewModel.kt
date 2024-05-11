@@ -5,7 +5,6 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.compose.data.network.utils.parseError
 import com.compose.domain.provider.ResourceProvider
 import com.compose.domain.usecase.GetCharacterUseCase
 import com.compose.presentation.main.navigation.NavArg
@@ -16,42 +15,39 @@ import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @HiltViewModel
-class DetailsViewModel @Inject constructor(
+class ContainerViewModel @Inject constructor(
     private val getCharacterUseCase: GetCharacterUseCase,
     private val resourceProvider: ResourceProvider,
     private val savedStateHandle: SavedStateHandle,
 ) : ViewModel() {
 
-    private val _state = MutableLiveData(DetailState())
-    val state: LiveData<DetailState> = _state
+    private val _state = MutableLiveData<ContainerState>()
+    val state: LiveData<ContainerState> = _state
 
     init {
         getCharacter()
     }
 
     private fun getCharacter() = viewModelScope.launch {
-        _state.value = DetailState(isLoading = true)
         savedStateHandle.findArg<Int>(NavArg.CharacterId).let { characterId ->
             getCharacterUseCase.invoke(characterId)
                 .catch { exception ->
-                    _state.value = DetailState(
-                        isLoading = true,
-                        messageNetwork = exception.parseError().error,
-                    )
+                    _state.value.apply {
+                        ContainerState.Loading(isLoading = false)
+                        ContainerState.Error(message = "")
+                    }
                 }
                 .collect { response ->
                     if (response.isSuccessful()) {
                         response.data?.let { character ->
-                            _state.value = DetailState(
-                                isLoading = true,
-                                character = character,
-                            )
+                            _state.value = ContainerState.Loading(isLoading = false)
+                            _state.value = ContainerState.Data(character = character)
                         }
                     } else {
-                        _state.value = DetailState(
-                            isLoading = true,
-                            messageError = response.details
-                                ?: resourceProvider.getErrorGettingCharacterLabel(),
+                        _state.value = ContainerState.Loading(isLoading = false)
+                        _state.value = ContainerState.Error(
+                            message = response.details
+                                ?: resourceProvider.getErrorGettingCharacterLabel()
                         )
                     }
                 }
