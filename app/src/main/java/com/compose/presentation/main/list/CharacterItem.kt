@@ -61,7 +61,6 @@ fun ItemCharacter(
                 )
                 Column(
                     modifier = Modifier
-                        .weight(1f)
                         .align(Alignment.CenterVertically)
                         .padding(dimensionResource(id = R.dimen.padding)),
                 ) {
