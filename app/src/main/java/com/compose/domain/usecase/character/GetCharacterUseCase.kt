@@ -3,7 +3,7 @@
  * Created by Ulises Gonzalez on 10/05/24
  * Copyright (c) 2024. All rights reserved.
  */
-package com.compose.domain.usecase
+package com.compose.domain.usecase.character
 
 import com.compose.domain.repository.CharacterRepository
 import javax.inject.Inject

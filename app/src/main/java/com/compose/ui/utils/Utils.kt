@@ -10,14 +10,25 @@ import coil.annotation.ExperimentalCoilApi
 import coil.imageLoader
 import com.compose.data.network.utils.DataError.Launch
 import com.compose.data.network.utils.Result
-import com.compose.domain.model.Character.Status
 
 fun Context.showToast(text: String) {
     Toast.makeText(this, text, Toast.LENGTH_SHORT).show()
 }
 
-
 fun String?.setValue(): String = this ?: "N/A"
+
+enum class Status {
+    ALIVE,
+    DEAD,
+    UNKNOWN,
+}
+
+fun String?.toStatus(): Status =
+    when (this?.lowercase() ?: "unknown") {
+        "alive" -> Status.ALIVE
+        "dead" -> Status.DEAD
+        else -> Status.UNKNOWN
+    }
 
 fun setStatusColor(status: Status): Color =
     when (status) {

@@ -1,17 +1,17 @@
-package com.compose.presentation.main.container.viewmodel
+package com.compose.presentation.main.detail.viewmodel
 
 import com.compose.domain.model.Character
 
-sealed class ContainerState {
+sealed class DetailState {
     internal data class Loading(
         val isLoading: Boolean,
-    ) : ContainerState()
+    ) : DetailState()
 
     internal data class Data(
         val character: Character,
-    ) : ContainerState()
+    ) : DetailState()
 
     internal data class Error(
         val message: String,
-    ) : ContainerState()
+    ) : DetailState()
 }

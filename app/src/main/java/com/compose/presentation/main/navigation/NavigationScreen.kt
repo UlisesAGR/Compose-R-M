@@ -12,18 +12,18 @@ import androidx.navigation.compose.rememberNavController
 import com.compose.ui.widgets.BottomBar
 
 @Composable
-fun AppNavigation(
-    navController: NavHostController = rememberNavController(),
-) {
+fun AppNavigation() {
+    val navController: NavHostController = rememberNavController()
     val backStackState = navController.currentBackStackEntryAsState().value
     val isBottomBarVisible = remember(key1 = backStackState) {
-        backStackState?.destination?.route == NavItem.Home.route
+        backStackState?.destination?.route == NavItem.Home.route ||
+                backStackState?.destination?.route == NavItem.Favorite.route
     }
     Scaffold(
         modifier = Modifier.fillMaxSize(),
         bottomBar = {
             if (isBottomBarVisible) {
-                BottomBar(navController)
+                BottomBar(navController, backStackState)
             }
         },
     ) { padding ->
@@ -34,5 +34,5 @@ fun AppNavigation(
 @Preview(showBackground = true)
 @Composable
 private fun PreviewNavigation() {
-    //AppNavigation(navController, viewModel)
+    AppNavigation()
 }

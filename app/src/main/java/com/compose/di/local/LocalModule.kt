@@ -34,5 +34,9 @@ object LocalModule {
         @Singleton
         @Provides
         fun provideRemoteKeysDao(db: Database) = db.remoteKeysDao()
+
+        @Singleton
+        @Provides
+        fun provideRemoteFavoriteDao(db: Database) = db.remoteFavoriteDao()
     }
 }

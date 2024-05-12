@@ -28,6 +28,7 @@ import com.compose.R
 import com.compose.domain.model.Character
 import com.compose.ui.theme.typography
 import com.compose.ui.utils.setValue
+import com.compose.ui.utils.toStatus
 import com.compose.ui.widgets.LoadImage
 import com.compose.ui.widgets.animatedColorText
 
@@ -48,58 +49,60 @@ fun ItemCharacter(
             containerColor = MaterialTheme.colorScheme.surfaceVariant,
         ),
     ) {
-        Row(
-            horizontalArrangement = Arrangement.SpaceBetween,
-        ) {
-            LoadImage(
-                modifier = Modifier.size(dimensionResource(id = R.dimen.image_small)),
-                data = character.image,
-                placeholder = android.R.drawable.progress_horizontal,
-                error = android.R.drawable.presence_offline,
-            )
-            Column(
-                modifier = Modifier
-                    .weight(1f)
-                    .align(Alignment.CenterVertically)
-                    .padding(dimensionResource(id = R.dimen.padding)),
+        character.apply {
+            Row(
+                horizontalArrangement = Arrangement.SpaceBetween,
             ) {
-                Text(
-                    modifier = Modifier.fillMaxWidth(),
-                    text = character.name.setValue(),
-                    maxLines = 1,
-                    softWrap = false,
-                    overflow = TextOverflow.Ellipsis,
-                    style = typography.titleMedium,
+                LoadImage(
+                    modifier = Modifier.size(dimensionResource(id = R.dimen.image_small)),
+                    data = image,
+                    placeholder = android.R.drawable.progress_horizontal,
+                    error = android.R.drawable.presence_offline,
                 )
-                Text(
+                Column(
                     modifier = Modifier
-                        .fillMaxWidth()
-                        .padding(top = dimensionResource(id = R.dimen.padding_small)),
-                    text = character.specie.setValue(),
-                    maxLines = 1,
-                    softWrap = true,
-                    style = typography.labelSmall,
-                )
-                Row(
-                    modifier = Modifier
-                        .fillMaxWidth()
-                        .padding(top = dimensionResource(id = R.dimen.padding)),
-                    horizontalArrangement = Arrangement.spacedBy(dimensionResource(id = R.dimen.padding_small)),
+                        .weight(1f)
+                        .align(Alignment.CenterVertically)
+                        .padding(dimensionResource(id = R.dimen.padding)),
                 ) {
-                    Icon(
-                        modifier = Modifier
-                            .size(dimensionResource(id = R.dimen.icon_small))
-                            .align(Alignment.CenterVertically),
-                        imageVector = Icons.Default.Circle,
-                        tint = animatedColorText(character.status),
-                        contentDescription = stringResource(R.string.circle_icon),
+                    Text(
+                        modifier = Modifier.fillMaxWidth(),
+                        text = name.setValue(),
+                        maxLines = 1,
+                        softWrap = false,
+                        overflow = TextOverflow.Ellipsis,
+                        style = typography.titleMedium,
                     )
                     Text(
-                        text = character.status.toString(),
+                        modifier = Modifier
+                            .fillMaxWidth()
+                            .padding(top = dimensionResource(id = R.dimen.padding_small)),
+                        text = specie.setValue(),
                         maxLines = 1,
                         softWrap = true,
                         style = typography.labelSmall,
                     )
+                    Row(
+                        modifier = Modifier
+                            .fillMaxWidth()
+                            .padding(top = dimensionResource(id = R.dimen.padding)),
+                        horizontalArrangement = Arrangement.spacedBy(dimensionResource(id = R.dimen.padding_small)),
+                    ) {
+                        Icon(
+                            modifier = Modifier
+                                .size(dimensionResource(id = R.dimen.icon_small))
+                                .align(Alignment.CenterVertically),
+                            imageVector = Icons.Default.Circle,
+                            tint = animatedColorText(status.toStatus()),
+                            contentDescription = stringResource(R.string.circle_icon),
+                        )
+                        Text(
+                            text = status.toString(),
+                            maxLines = 1,
+                            softWrap = true,
+                            style = typography.labelSmall,
+                        )
+                    }
                 }
             }
         }

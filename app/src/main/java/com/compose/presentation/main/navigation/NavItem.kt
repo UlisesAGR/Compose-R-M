@@ -3,6 +3,7 @@ package com.compose.presentation.main.navigation
 import androidx.compose.runtime.Composable
 import androidx.lifecycle.SavedStateHandle
 import androidx.navigation.NavBackStackEntry
+import androidx.navigation.NavController
 import androidx.navigation.NavGraphBuilder
 import androidx.navigation.NavType
 import androidx.navigation.compose.composable
@@ -28,6 +29,8 @@ sealed class NavItem(
     data object Detail : NavItem("detail", listOf(NavArg.CharacterId)) {
         fun createNavRoute(characterId: Int) = "$baseRoute/$characterId"
     }
+
+    data object Favorite : NavItem("favorite")
 }
 
 enum class NavArg(val key: String, val navType: NavType<*>) {
@@ -46,9 +49,21 @@ fun NavGraphBuilder.composable(
     }
 }
 
-@Suppress("DEPRECATION")
+fun navigateTo(navController: NavController, route: String) {
+    navController.navigate(route) {
+        navController.graph.startDestinationRoute?.let { screenRoute ->
+            popUpTo(screenRoute) {
+                saveState = true
+            }
+        }
+        launchSingleTop = true
+        restoreState = true
+    }
+}
+
+/*@Suppress("DEPRECATION")
 inline fun <reified T> NavBackStackEntry.findArg(arg: NavArg): T =
-    requireNotNull(arguments?.get(arg.key)) as T
+    requireNotNull(arguments?.get(arg.key)) as T*/
 
 inline fun <reified T> SavedStateHandle.findArg(arg: NavArg): T =
     requireNotNull(this[arg.key]) as T

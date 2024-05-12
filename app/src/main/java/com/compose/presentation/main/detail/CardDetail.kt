@@ -21,6 +21,7 @@ import com.compose.R
 import com.compose.domain.model.Character
 import com.compose.ui.theme.typography
 import com.compose.ui.utils.setValue
+import com.compose.ui.utils.toStatus
 import com.compose.ui.widgets.LoadCircularImage
 import com.compose.ui.widgets.animatedColorText
 
@@ -72,7 +73,7 @@ fun CardDetail(character: Character) {
                             .size(dimensionResource(id = R.dimen.icon))
                             .align(Alignment.CenterVertically),
                         imageVector = Icons.Default.Circle,
-                        tint = animatedColorText(status),
+                        tint = animatedColorText(status.toStatus()),
                         contentDescription = stringResource(R.string.circle_icon),
                     )
                     Text(

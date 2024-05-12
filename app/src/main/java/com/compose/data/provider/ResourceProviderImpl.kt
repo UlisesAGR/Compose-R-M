@@ -16,6 +16,11 @@ class ResourceProviderImpl @Inject constructor(
     @ApplicationContext appContext: Context,
 ) : ResourceProvider {
     private val resource = appContext.resources
+    override fun addInFavoriteLabel(): String =
+        resource.getString(R.string.add_in_favorite)
+
+    override fun deleteInFavoriteLabel(): String =
+        resource.getString(R.string.delete_in_favorite)
 
     override fun errorGetCharacterLabel(): String =
         resource.getString(R.string.error_getting_character)

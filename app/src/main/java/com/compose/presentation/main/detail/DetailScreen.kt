@@ -6,6 +6,7 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.automirrored.filled.Message
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.livedata.observeAsState
 import androidx.compose.runtime.mutableStateOf
@@ -20,8 +21,9 @@ import androidx.hilt.navigation.compose.hiltViewModel
 import com.compose.R
 import com.compose.data.network.utils.Result
 import com.compose.domain.utils.Constants
-import com.compose.presentation.main.container.viewmodel.ContainerState
-import com.compose.presentation.main.container.viewmodel.ContainerViewModel
+import com.compose.presentation.main.detail.viewmodel.DetailState
+import com.compose.presentation.main.detail.viewmodel.DetailViewModel
+import com.compose.ui.utils.UIComponent
 import com.compose.ui.utils.launchWeb
 import com.compose.ui.utils.showToast
 import com.compose.ui.widgets.DetailsTopBar
@@ -30,18 +32,30 @@ import com.compose.ui.widgets.ProgressIndicator
 
 @Composable
 fun DetailScreen(
+    viewModel: DetailViewModel = hiltViewModel(),
     onBack: () -> Unit,
-    viewModel: ContainerViewModel = hiltViewModel(),
 ) {
     val context = LocalContext.current
     var show by rememberSaveable { mutableStateOf(true) }
-    val state = viewModel.state.observeAsState(ContainerState.Loading(isLoading = true)).value
+    val state = viewModel.state.observeAsState(DetailState.Loading(isLoading = true)).value
+    val sideEffect = viewModel.components.observeAsState().value
+
+    LaunchedEffect(key1 = sideEffect) {
+        sideEffect?.let {
+            when (sideEffect) {
+                is UIComponent.Toast ->
+                    context.showToast(sideEffect.message)
+            }
+        }
+    }
 
     Column(modifier = Modifier.fillMaxSize()) {
         DetailsTopBar(
             title = stringResource(id = R.string.character_detail),
             onBack = onBack,
-            onFavorite = {},
+            onFavorite = {
+                viewModel.existInFavorites()
+            },
             onShare = {
                 context.apply {
                     when (launchWeb(Constants.URL_DOCUMENTATION)) {
@@ -54,19 +68,18 @@ fun DetailScreen(
                 }
             },
         )
-
         Box(modifier = Modifier.fillMaxSize()) {
             when (state) {
-                is ContainerState.Loading ->
+                is DetailState.Loading ->
                     ProgressIndicator(
                         isLoading = state.isLoading,
                         modifier = Modifier.align(Alignment.Center)
                     )
 
-                is ContainerState.Data ->
+                is DetailState.Data ->
                     CardDetail(state.character)
 
-                is ContainerState.Error ->
+                is DetailState.Error ->
                     Dialog(
                         isShow = show,
                         icon = Icons.AutoMirrored.Filled.Message,

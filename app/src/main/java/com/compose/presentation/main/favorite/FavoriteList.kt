@@ -1,42 +1,37 @@
-package com.compose.presentation.main.list
+package com.compose.presentation.main.favorite
 
-import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
+import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.dimensionResource
-import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
-import androidx.compose.ui.tooling.preview.Preview
-import androidx.compose.ui.unit.dp
 import com.compose.R
 import com.compose.domain.model.Character
-import com.compose.domain.model.getCharacters
+import com.compose.presentation.main.list.ItemCharacter
+import com.compose.ui.theme.typography
 
 @Composable
-fun ListScreen(
+fun FavoriteList(
     padding: PaddingValues,
+    characters: List<Character>,
     characterSelected: (Character) -> Unit,
 ) {
     Column(
         modifier = Modifier
             .fillMaxSize()
-            .padding(padding),
+            .padding(padding)
     ) {
-        Image(
-            modifier = Modifier
-                .width(135.dp)
-                .height(65.dp),
-            painter = painterResource(id = R.drawable.il_logo_words),
-            contentDescription = stringResource(id = R.string.logo_words),
+        Text(
+            modifier = Modifier.padding(dimensionResource(id = R.dimen.padding)),
+            text = stringResource(R.string.favorites),
+            style = typography.titleLarge,
         )
         LazyColumn(
             modifier = Modifier.fillMaxSize(),
@@ -48,7 +43,7 @@ fun ListScreen(
             verticalArrangement = Arrangement.spacedBy(dimensionResource(id = R.dimen.padding)),
         ) {
             items(
-                items = getCharacters(),
+                items = characters,
                 key = { it.id },
             ) { character ->
                 ItemCharacter(
@@ -60,10 +55,4 @@ fun ListScreen(
             }
         }
     }
-}
-
-@Preview(showBackground = true)
-@Composable
-private fun PreviewListScreen() {
-    ListScreen(PaddingValues(), characterSelected = {})
 }

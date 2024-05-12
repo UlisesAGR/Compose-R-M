@@ -11,16 +11,16 @@ import androidx.compose.runtime.getValue
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.stringResource
 import com.compose.R
-import com.compose.domain.model.Character
+import com.compose.ui.utils.Status
 
 @Composable
-fun animatedColorText(status: Character.Status): Color {
+fun animatedColorText(status: Status): Color {
     val infiniteTransition =
         rememberInfiniteTransition(label = stringResource(R.string.infinite_transition))
     val statusColors = when (status) {
-        Character.Status.ALIVE -> Pair(MaterialTheme.colorScheme.onBackground, Color(0XFF78BA46))
-        Character.Status.DEAD -> Pair(MaterialTheme.colorScheme.onBackground, Color(0xFFBA1A1A))
-        Character.Status.UNKNOWN -> Pair(MaterialTheme.colorScheme.onBackground, Color(0xFF74796D))
+        Status.ALIVE -> Pair(MaterialTheme.colorScheme.onBackground, Color(0XFF78BA46))
+        Status.DEAD -> Pair(MaterialTheme.colorScheme.onBackground, Color(0xFFBA1A1A))
+        Status.UNKNOWN -> Pair(MaterialTheme.colorScheme.onBackground, Color(0xFF74796D))
     }
     val animatedColor by infiniteTransition.animateColor(
         initialValue = statusColors.first,

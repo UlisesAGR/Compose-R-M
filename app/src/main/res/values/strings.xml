@@ -21,4 +21,7 @@
     <string name="confirm">Confirm</string>
     <string name="dismiss">Dismiss</string>
     <string name="message">Message</string>
+    <string name="favorites">Favorites</string>
+    <string name="add_in_favorite">Character added Successful</string>
+    <string name="delete_in_favorite">Character deleted Successful</string>
 </resources>

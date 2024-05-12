@@ -8,6 +8,8 @@ package com.compose.domain.provider
 import com.compose.data.network.utils.DataError
 
 interface ResourceProvider {
+    fun addInFavoriteLabel(): String
+    fun deleteInFavoriteLabel(): String
     fun errorGetCharacterLabel(): String
     fun errorRedLabel(): String
     fun errorTimeoutLabel(): String
