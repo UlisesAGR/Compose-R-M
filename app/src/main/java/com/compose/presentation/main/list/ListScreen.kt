@@ -1,7 +1,5 @@
 package com.compose.presentation.main.list
 
-import androidx.compose.foundation.Image
-import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.fillMaxSize
@@ -10,6 +8,7 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
+import androidx.compose.material3.Icon
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.dimensionResource
@@ -20,6 +19,8 @@ import androidx.compose.ui.unit.dp
 import com.compose.R
 import com.compose.domain.model.Character
 import com.compose.domain.model.getCharacters
+import com.compose.presentation.main.common.ItemCharacter
+import com.compose.ui.widgets.animatedColorText
 
 @Composable
 fun ListScreen(
@@ -31,21 +32,17 @@ fun ListScreen(
             .fillMaxSize()
             .padding(padding),
     ) {
-        Image(
+        Icon(
             modifier = Modifier
                 .width(135.dp)
                 .height(65.dp),
             painter = painterResource(id = R.drawable.il_logo_words),
             contentDescription = stringResource(id = R.string.logo_words),
+            tint = animatedColorText(),
         )
         LazyColumn(
             modifier = Modifier.fillMaxSize(),
-            contentPadding = PaddingValues(
-                start = dimensionResource(id = R.dimen.padding),
-                end = dimensionResource(id = R.dimen.padding),
-                bottom = dimensionResource(id = R.dimen.padding),
-            ),
-            verticalArrangement = Arrangement.spacedBy(dimensionResource(id = R.dimen.padding)),
+            contentPadding = PaddingValues(bottom = dimensionResource(id = R.dimen.padding))
         ) {
             items(
                 items = getCharacters(),

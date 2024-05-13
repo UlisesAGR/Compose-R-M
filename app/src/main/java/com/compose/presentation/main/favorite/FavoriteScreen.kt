@@ -22,6 +22,7 @@ import androidx.hilt.navigation.compose.hiltViewModel
 import com.compose.R
 import com.compose.domain.model.Character
 import com.compose.presentation.main.common.CharacterShimmerEffect
+import com.compose.presentation.main.common.EmptyScreen
 import com.compose.presentation.main.favorite.viewmodel.FavoriteState
 import com.compose.presentation.main.favorite.viewmodel.FavoriteViewModel
 import com.compose.ui.theme.typography
@@ -51,8 +52,16 @@ fun FavoriteScreen(
                 is FavoriteState.Loading ->
                     CharacterShimmerEffect(state.isLoading)
 
-                is FavoriteState.Data ->
-                    FavoriteList(state.characters, characterSelected)
+                is FavoriteState.Data -> {
+                    if (state.characters.isNotEmpty()) {
+                        FavoriteList(state.characters, characterSelected)
+                    } else {
+                        EmptyScreen(
+                            icon = R.drawable.il_logo_words,
+                            message = stringResource(R.string.you_dont_have_favorite_characters),
+                        )
+                    }
+                }
 
                 is FavoriteState.Error ->
                     Dialog(

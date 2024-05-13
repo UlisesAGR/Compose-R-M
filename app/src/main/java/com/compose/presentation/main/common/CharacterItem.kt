@@ -1,4 +1,4 @@
-package com.compose.presentation.main.list
+package com.compose.presentation.main.common
 
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
@@ -21,6 +21,8 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.clip
+import androidx.compose.ui.graphics.RectangleShape
 import androidx.compose.ui.res.dimensionResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextOverflow
@@ -29,6 +31,7 @@ import com.compose.domain.model.Character
 import com.compose.ui.theme.typography
 import com.compose.ui.utils.setValue
 import com.compose.ui.utils.toStatus
+import com.compose.ui.widgets.Divider
 import com.compose.ui.widgets.LoadImage
 import com.compose.ui.widgets.animatedColorText
 
@@ -39,30 +42,33 @@ fun ItemCharacter(
 ) {
     var clickEnable by remember { mutableStateOf(true) }
     Card(
+        colors = CardDefaults.cardColors(
+            containerColor = MaterialTheme.colorScheme.surfaceVariant,
+        ),
         modifier = Modifier
             .fillMaxWidth()
             .clickable(enabled = clickEnable) {
                 clickEnable = false
                 onClick()
             },
-        colors = CardDefaults.cardColors(
-            containerColor = MaterialTheme.colorScheme.surfaceVariant,
-        ),
+        shape = RectangleShape,
     ) {
         character.apply {
-            Row(
-                horizontalArrangement = Arrangement.SpaceBetween,
-            ) {
+            Row {
                 LoadImage(
-                    modifier = Modifier.size(dimensionResource(id = R.dimen.image_small)),
+                    modifier = Modifier
+                        .size(dimensionResource(id = R.dimen.image_small))
+                        .padding(dimensionResource(id = R.dimen.padding))
+                        .clip(MaterialTheme.shapes.small),
                     data = image,
                     placeholder = android.R.drawable.progress_horizontal,
                     error = android.R.drawable.presence_offline,
                 )
                 Column(
                     modifier = Modifier
-                        .align(Alignment.CenterVertically)
-                        .padding(dimensionResource(id = R.dimen.padding)),
+                        .fillMaxWidth()
+                        .align(Alignment.CenterVertically),
+                    verticalArrangement = Arrangement.spacedBy(dimensionResource(id = R.dimen.padding)),
                 ) {
                     Text(
                         modifier = Modifier.fillMaxWidth(),
@@ -73,18 +79,14 @@ fun ItemCharacter(
                         style = typography.titleMedium,
                     )
                     Text(
-                        modifier = Modifier
-                            .fillMaxWidth()
-                            .padding(top = dimensionResource(id = R.dimen.padding_small)),
+                        modifier = Modifier.fillMaxWidth(),
                         text = specie.setValue(),
                         maxLines = 1,
                         softWrap = true,
                         style = typography.labelSmall,
                     )
                     Row(
-                        modifier = Modifier
-                            .fillMaxWidth()
-                            .padding(top = dimensionResource(id = R.dimen.padding)),
+                        modifier = Modifier.fillMaxWidth(),
                         horizontalArrangement = Arrangement.spacedBy(dimensionResource(id = R.dimen.padding_small)),
                     ) {
                         Icon(
@@ -104,6 +106,7 @@ fun ItemCharacter(
                     }
                 }
             }
+            Divider(modifier = Modifier.align(Alignment.End))
         }
     }
 }

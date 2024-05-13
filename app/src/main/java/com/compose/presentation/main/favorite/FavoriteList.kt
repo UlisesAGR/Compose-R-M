@@ -1,6 +1,5 @@
 package com.compose.presentation.main.favorite
 
-import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.lazy.LazyColumn
@@ -10,7 +9,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.dimensionResource
 import com.compose.R
 import com.compose.domain.model.Character
-import com.compose.presentation.main.list.ItemCharacter
+import com.compose.presentation.main.common.ItemCharacter
 
 @Composable
 fun FavoriteList(
@@ -19,12 +18,7 @@ fun FavoriteList(
 ) {
     LazyColumn(
         modifier = Modifier.fillMaxSize(),
-        contentPadding = PaddingValues(
-            start = dimensionResource(id = R.dimen.padding),
-            end = dimensionResource(id = R.dimen.padding),
-            bottom = dimensionResource(id = R.dimen.padding),
-        ),
-        verticalArrangement = Arrangement.spacedBy(dimensionResource(id = R.dimen.padding)),
+        contentPadding = PaddingValues(bottom = dimensionResource(id = R.dimen.padding))
     ) {
         items(
             items = characters,

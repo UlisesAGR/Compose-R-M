@@ -26,4 +26,6 @@
     <string name="delete_in_favorite">Character deleted Successful</string>
     <string name="shimmer">Shimmer</string>
     <string name="shimmer_transition">Shimmer Transition</string>
+    <string name="you_dont_have_favorite_characters">You dont have favorite characters</string>
+    <string name="example">Example</string>
 </resources>

@@ -14,6 +14,20 @@ import com.compose.R
 import com.compose.ui.utils.Status
 
 @Composable
+fun animatedColorText(): Color {
+    val infiniteTransition =
+        rememberInfiniteTransition(label = stringResource(R.string.infinite_transition))
+    val statusColors = Pair(MaterialTheme.colorScheme.onBackground, Color(0XFF78BA46))
+    val animatedColor by infiniteTransition.animateColor(
+        initialValue = statusColors.first,
+        targetValue = statusColors.second,
+        animationSpec = infiniteRepeatable(tween(800), RepeatMode.Reverse),
+        label = stringResource(R.string.animated_color),
+    )
+    return animatedColor
+}
+
+@Composable
 fun animatedColorText(status: Status): Color {
     val infiniteTransition =
         rememberInfiniteTransition(label = stringResource(R.string.infinite_transition))
@@ -26,7 +40,7 @@ fun animatedColorText(status: Status): Color {
         initialValue = statusColors.first,
         targetValue = statusColors.second,
         animationSpec = infiniteRepeatable(tween(800), RepeatMode.Reverse),
-        label = stringResource(R.string.animated_color)
+        label = stringResource(R.string.animated_color),
     )
     return animatedColor
 }
