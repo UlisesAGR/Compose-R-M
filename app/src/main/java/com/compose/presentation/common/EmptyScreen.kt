@@ -43,12 +43,3 @@ fun EmptyScreen(
         )
     }
 }
-
-@Preview(showBackground = true)
-@Composable
-fun EmptyScreenPreview() {
-    EmptyScreen(
-        icon = R.drawable.il_logo_words,
-        message = stringResource(R.string.example),
-    )
-}

@@ -17,7 +17,6 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.dimensionResource
 import androidx.compose.ui.res.stringResource
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.hilt.navigation.compose.hiltViewModel
 import com.compose.R
 import com.compose.domain.model.Character
@@ -26,7 +25,7 @@ import com.compose.presentation.common.EmptyScreen
 import com.compose.presentation.screen.favorite.viewmodel.FavoriteState
 import com.compose.presentation.screen.favorite.viewmodel.FavoriteViewModel
 import com.compose.ui.theme.typography
-import com.compose.ui.widgets.Dialog
+import com.compose.ui.widgets.BottomSheet
 
 @Composable
 fun FavoriteScreen(
@@ -69,21 +68,15 @@ fun FavoriteScreen(
                 }
 
                 is FavoriteState.Error ->
-                    Dialog(
+                    BottomSheet(
                         isShow = show,
                         icon = Icons.AutoMirrored.Filled.Message,
-                        text = state.message,
-                        onConfirmation = {
+                        message = state.message,
+                        onDismiss = {
                             show = false
                         },
                     )
             }
         }
     }
-}
-
-@Preview(showBackground = true)
-@Composable
-private fun PreviewListScreen() {
-    FavoriteScreen(viewModel = hiltViewModel(), PaddingValues()) {}
 }

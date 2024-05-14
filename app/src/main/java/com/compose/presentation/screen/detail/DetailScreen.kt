@@ -16,7 +16,6 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.hilt.navigation.compose.hiltViewModel
 import com.compose.R
 import com.compose.data.network.utils.Result
@@ -26,8 +25,8 @@ import com.compose.presentation.screen.detail.viewmodel.DetailViewModel
 import com.compose.ui.utils.UIComponent
 import com.compose.ui.utils.launchWeb
 import com.compose.ui.utils.showToast
+import com.compose.ui.widgets.BottomSheet
 import com.compose.ui.widgets.DetailsTopBar
-import com.compose.ui.widgets.Dialog
 import com.compose.ui.widgets.ProgressIndicator
 
 @Composable
@@ -50,7 +49,9 @@ fun DetailScreen(
         }
     }
 
-    Column(modifier = Modifier.fillMaxSize()) {
+    Column(
+        modifier = Modifier.fillMaxSize(),
+    ) {
         DetailsTopBar(
             title = stringResource(id = R.string.character_detail),
             onBack = onBack,
@@ -78,15 +79,14 @@ fun DetailScreen(
                     )
 
                 is DetailState.Data ->
-                    CardDetail(state.character)
+                    CardDetail(character = state.character)
 
                 is DetailState.Error ->
-                    Dialog(
-                        modifier = Modifier.align(Alignment.Center),
+                    BottomSheet(
                         isShow = show,
                         icon = Icons.AutoMirrored.Filled.Message,
-                        text = state.message,
-                        onConfirmation = {
+                        message = state.message,
+                        onDismiss = {
                             onBack()
                             show = false
                         },
@@ -95,10 +95,3 @@ fun DetailScreen(
         }
     }
 }
-
-@Preview(showBackground = true)
-@Composable
-private fun PreviewDetailScreen() {
-    DetailScreen(onBack = {})
-}
-
