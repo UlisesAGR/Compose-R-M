@@ -23,7 +23,7 @@ class FavoriteDataSource @Inject constructor(
             }
         }
 
-    suspend fun existInFavorites(id: Int) =
+    suspend fun existInFavorites(id: Int): Character? =
         favoriteDao.existInFavorites(id)?.toDomain()
 
     suspend fun addToFavorite(character: Character) =

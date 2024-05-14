@@ -7,8 +7,8 @@ import androidx.compose.ui.Modifier
 
 @Composable
 fun ProgressIndicator(
-    isLoading: Boolean,
     modifier: Modifier = Modifier,
+    isLoading: Boolean,
 ) {
     if (isLoading) {
         CircularProgressIndicator(

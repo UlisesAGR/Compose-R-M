@@ -5,12 +5,14 @@ import androidx.compose.material3.Icon
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextButton
 import androidx.compose.runtime.Composable
+import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.res.stringResource
 import com.compose.R
 
 @Composable
 fun Dialog(
+    modifier: Modifier = Modifier,
     isShow: Boolean,
     icon: ImageVector,
     text: String,
@@ -18,6 +20,7 @@ fun Dialog(
 ) {
     if (isShow) {
         AlertDialog(
+            modifier = modifier,
             icon = {
                 Icon(
                     imageVector = icon,

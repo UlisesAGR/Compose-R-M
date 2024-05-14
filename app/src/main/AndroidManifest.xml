@@ -19,12 +19,7 @@
         tools:targetApi="31">
 
         <activity
-            android:name=".presentation.main.container.ContainerScreen"
-            android:exported="true"
-            android:windowSoftInputMode="adjustResize" />
-
-        <activity
-            android:name=".presentation.beginning.container.BeginningContainer"
+            android:name=".presentation.screen.container.ContainerScreen"
             android:exported="true"
             android:theme="@style/App.Starting.Theme"
             android:windowSoftInputMode="adjustResize">
